@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %} {% endblock %}</title>
+    <title>Bureau of Fire Protection</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,6 +17,10 @@
     {% block extra_css %} {% endblock %}
   </head>
   <body>
+    {% if current_page not in ['sign_up', 'login'] %} {% include 'components/navbar.html' %} {% endif %}
+
+
+    <script src="{{url_for('static', filename='javascript/navbar.js')}}"></script>
     {% block content %} {% endblock %} {% block extra_scripts %} {% endblock %}
   </body>
 </html>

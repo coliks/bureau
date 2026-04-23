@@ -8,3 +8,14 @@
         @apply bg-gray-100 font-poppins text-gray-800;
     }
 }
+
+@layer components {
+    .navlink {
+        @apply flex items-center gap-3 px-4 py-3 rounded-md text-sm text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium hover:shadow-sm;
+    }
+
+    .active-navlink {
+        @apply bg-sky-600 flex items-center gap-3 px-4 py-3 rounded-md text-sm text-white font-medium;
+    }
+}
+
