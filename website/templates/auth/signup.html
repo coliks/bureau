@@ -1,0 +1,47 @@
+{% extends 'base.html' %} {% block extra_css %} {% endblock %} {% block content
+%}
+<div class="bg-[url('/static/images/bfp-bg.jpg')] bg-cover bg-center h-screen grid grid-cols-2">
+    <div class="bg-black/60 p-32 flex flex-col items-start justify-end text-white">
+        <span class="text-sm">Santa Cruz, Fire Station</span>
+        <span class="text-3xl font-bold mb-5">Bureau of Fire Protection</span>
+        <span class="text-sm font-light">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur debitis similique aperiam reprehenderit, corporis illo quaerat, minus explicabo mollitia necessitatibus doloribus perspiciatis quas ullam sunt accusantium a expedita modi porro.</span>
+    </div>
+    <div class="bg-white flex flex-col items-start justify-center p-32">
+        <span class="text-3xl font-bold">Sign Up</span>
+        <span class="text-sm font-light">Fill up all fields to create your account.</span>
+        <form action="" class="mt-10 mb-10 w-full grid grid-cols-2 gap-5">
+            <div class="flex flex-col">
+                <label for="" class="text-sm">First name <span class="text-red-500">*</span></label>
+                <input type="text" placeholder="ex. Juan" class="text-sm p-4 py-3 rounded-md bg-gray-100">
+            </div>
+            <div class="flex flex-col">
+                <label for="" class="text-sm">Last name <span class="text-red-500">*</span></label>
+                <input type="text" placeholder="ex. Tamad" class="text-sm p-4 py-3 rounded-md bg-gray-100">
+            </div>
+            <div class="flex flex-col">
+                <label for="" class="text-sm">Email <span class="text-red-500">*</span></label>
+                <input type="email" placeholder="ex@gmail.com" class="text-sm p-4 py-3 rounded-md bg-gray-100">
+            </div>
+            <div class="flex flex-col">
+                <label for="" class="text-sm">Contact number <span class="text-red-500">*</span></label>
+                <input type="number" placeholder="ex. 09*********" class="text-sm p-4 py-3 rounded-md bg-gray-100">
+            </div>
+            <div class="flex flex-col">
+                <label for="" class="text-sm">Create password <span class="text-red-500">*</span></label>
+                <input type="password" placeholder="ex. JuanTamad123" class="text-sm p-4 py-3 rounded-md bg-gray-100">
+            </div>
+            <div class="flex flex-col">
+                <label for="" class="text-sm">Confirm password <span class="text-red-500">*</span></label>
+                <input type="password" placeholder="ex. JuanTamad123" class="text-sm p-4 py-3 rounded-md bg-gray-100">
+            </div>
+            <button class="text-sm flex items-center justify-center bg-sky-600 text-white p-3 rounded-md col-span-2">
+                Register Account
+            </button>
+        </form>
+        <div class="border w-full mb-10"></div>
+        <div class="flex items-center justify-center w-full">
+            <p class="text-sm">Already have an account? <a href="{{url_for('auth.login')}}" class="hover:underline hover:text-blue-600 text-blue-600">Login</a></p>
+        </div>
+    </div>
+</div>
+{% endblock %} {% block extra_scripts %} {% endblock %}

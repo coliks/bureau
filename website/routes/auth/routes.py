@@ -8,3 +8,7 @@ def index():
 @auth.route('/login', methods=['POST', 'GET'])
 def login():
     return render_template('auth/login.html')
+
+@auth.route('/register', methods=['POST', 'GET'])
+def register_account():
+    return render_template('auth/signup.html')
