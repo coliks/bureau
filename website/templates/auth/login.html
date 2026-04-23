@@ -16,15 +16,19 @@
             </div>
             <div class="flex flex-col">
                 <label for="" class="text-sm">Password</label>
-                <input type="text" placeholder="Enter your password" class="text-sm p-4 py-3 rounded-md bg-gray-100">
+                <input type="password" placeholder="Enter your password" class="text-sm p-4 py-3 rounded-md bg-gray-100">
             </div>
             <div class="flex items-center justify-end">
-                <span class="text-sm">Forgot password?</span>
+                <span class="text-sm hover:cursor-pointer hover:underline hover:text-blue-600">Forgot password?</span>
             </div>
             <button class="text-sm flex items-center justify-center bg-sky-600 text-white p-3 rounded-md">
                 Sign In
             </button>
         </form>
+        <div class="border w-full mb-10"></div>
+        <div class="flex items-center justify-center w-full">
+            <p class="text-sm">Don't have an account? <a href="" class="hover:underline hover:text-blue-600">Create Account</a></p>
+        </div>
     </div>
 </div>
 {% endblock %} {% block extra_scripts %} {% endblock %}
