@@ -1,0 +1,71 @@
+<div class="fixed inset-0 bg-black/60 hidden items-center justify-center" id="business-form-modal">
+  <div class="bg-white rounded-lg p-5 min-w-[600px]">
+    <div class="flex items-start justify-between mb-5">
+      <div class="flex items-start flex-col">
+        <span class="text-lg font-semibold">Create New Record</span>
+        <span class="text-sm">Fill up all fields to create new business record</span>
+      </div>
+      <button class="flex items-center justify-center p-2 rounded-md hover:bg-gray-100" id="business-form-closer">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-5"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18 18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    </div>
+    <form action="" class="grid grid-cols-2 gap-4">
+        <div class="col-span-2 flex flex-col">
+            <label for="" class="text-sm font-semibold text-gray-500">BUSINESS NAME <span class="text-red-500">*</span></label>
+            <input type="text" class="bg-gray-100 rounded-md px-4 py-3 text-sm" placeholder="Enter business name">
+        </div>
+        <div class="col-span-2 flex flex-col">
+            <label for="" class="text-sm font-semibold text-gray-500">BUSINESS ADDRESS <span class="text-red-500">*</span></label>
+            <input type="text" class="bg-gray-100 rounded-md px-4 py-3 text-sm" placeholder="Enter business address">
+        </div>
+        <div class="col-span-1 flex flex-col">
+            <label for="" class="text-sm font-semibold text-gray-500">OWNER NAME <span class="text-red-500">*</span></label>
+            <input type="text" class="bg-gray-100 rounded-md px-4 py-3 text-sm" placeholder="Enter owner name">
+        </div>
+        <div class="col-span-1 flex flex-col">
+            <label for="" class="text-sm font-semibold text-gray-500">REPRESENTATIVE NAME <span class="text-red-500">*</span></label>
+            <input type="text" class="bg-gray-100 rounded-md px-4 py-3 text-sm" placeholder="Enter representative name">
+        </div>
+        <div class="col-span-1 flex flex-col">
+            <label for="" class="text-sm font-semibold text-gray-500">CONTACT NUMBER <span class="text-red-500">*</span></label>
+            <input type="text" class="bg-gray-100 rounded-md px-4 py-3 text-sm" placeholder="Enter contact number">
+        </div>
+        <div class="col-span-1 flex flex-col">
+            <label for="" class="text-sm font-semibold text-gray-500">BUSINESS ID <span class="text-red-500">*</span></label>
+            <input type="text" class="bg-gray-100 rounded-md px-4 py-3 text-sm" placeholder="Enter business id">
+        </div>
+        <div class="col-span-1 flex flex-col">
+            <label for="" class="text-sm font-semibold text-gray-500">CONTROL NO. <span class="text-red-500">*</span></label>
+            <input type="text" class="bg-gray-100 rounded-md px-4 py-3 text-sm" placeholder="Enter control number">
+        </div>
+        <div class="col-span-1 flex flex-col">
+            <label for="" class="text-sm font-semibold text-gray-500">APPLICATION NO. <span class="text-red-500">*</span></label>
+            <input type="text" class="bg-gray-100 rounded-md px-4 py-3 text-sm" placeholder="Enter application number">
+        </div>
+        <div class="col-span-1 flex flex-col">
+            <label for="" class="text-sm font-semibold text-gray-500">STATUS <span class="text-red-500">*</span></label>
+            <input type="text" class="bg-gray-100 rounded-md px-4 py-3 text-sm" placeholder="Enter application status">
+        </div>
+        <div class="col-span-1 flex flex-col">
+            <label for="" class="text-sm font-semibold text-gray-500">FIRE INSPECTION FEE <span class="text-red-500">*</span></label>
+            <input type="text" class="bg-gray-100 rounded-md px-4 py-3 text-sm" placeholder="Enter fire inspection fee">
+        </div>
+        <button class="bg-green-600 text-white px-4 py-3 rounded-md text-sm col-span-2 mt-2">
+            Save Business
+        </button>
+    </form>
+  </div>
+</div>
