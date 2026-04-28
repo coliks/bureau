@@ -12,15 +12,21 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="{{url_for('static', filename='dist/output.css')}}">
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='dist/output.css')}}"
+    />
+
+    <link rel="icon" href="{{url_for('static', filename='favico.png')}}">
 
     {% block extra_css %} {% endblock %}
   </head>
   <body>
-    {% if current_page not in ['sign_up', 'login'] %} {% include 'components/navbar.html' %} {% endif %}
-
-
+    {% if current_page not in ['sign_up', 'login'] %} {% include
+    'components/navbar.html' %} {% endif %} {% block content %} {% endblock %}
     <script src="{{url_for('static', filename='javascript/navbar.js')}}"></script>
-    {% block content %} {% endblock %} {% block extra_scripts %} {% endblock %}
+    {% block extra_scripts %}
+    
+    {% endblock %}
   </body>
 </html>
