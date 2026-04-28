@@ -15,13 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json()
 
             if (data.success) {
-
                 registrationModal.classList.remove('hidden')
                 registrationModal.classList.add('flex')
-                alert(data.message);
                 form.reset();
             } else {
-                alert('Something went wrong');
+                alert(data.message);
             }
 
         } catch (error) {

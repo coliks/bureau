@@ -24,8 +24,16 @@ def register_account():
         password1 = request.form.get('password-1')
         password2 = request.form.get('password-2')
 
-        print(fname, lname, email, contact, password1, password2)
+        fields = [fname, lname, email, contact, password1, password2]
         
+        fullname = f'{fname} {lname}'
+
+        for field in fields:
+            if field == '':
+                return jsonify(success=False, message="Failed empty fields.")
+        
+        if password1 != password2:
+            raise jsonify(success=False, message='Password does not match!')
         
 
         return jsonify(success=True, message='Account created successfully!')
