@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    document.querySelectorAll('[id="table-view-btn"]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            alert()
+        })
+    })
 
 
 })

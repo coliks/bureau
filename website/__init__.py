@@ -10,7 +10,10 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    init_db()
+    try:
+        init_db()
+    except Exception as e:
+        print("Error: ",e)
 
     app.register_blueprint(admin)
     app.register_blueprint(auth)
