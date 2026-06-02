@@ -1,7 +1,10 @@
 from flask import render_template, redirect, url_for, request, flash, jsonify
 from . import auth
+from flask_login import login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 
 from ...services.connection import get_db_connection
+from ...models import User
 
 @auth.route('/')
 def index():
@@ -9,7 +12,33 @@ def index():
 
 @auth.route('/login', methods=['POST', 'GET'])
 def login():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        
+        user = User.get_by_email(email)
+        
+        if user and check_password_hash(user.password, password):
+            if user.status == 'active':
+                login_user(user, remember=True)
+                return redirect(url_for('admin.dashboard'))
+            elif user.status == 'pending':
+                flash('Your account is waiting for admin approval!', 'error')
+                return render_template('auth/login.html', current_page='login')
+            else:
+                flash('Account is inactive!', 'error')
+                return render_template('auth/login.html', current_page='login')
+        else:
+            flash('Invalid email or password!', 'error')
+            return render_template('auth/login.html', current_page='login')
+            
     return render_template('auth/login.html', current_page='login')
+
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('auth.login'))
 
 @auth.route('/register', methods=['POST', 'GET'])
 def register_account():
@@ -33,8 +62,24 @@ def register_account():
                 return jsonify(success=False, message="Failed empty fields.")
         
         if password1 != password2:
-            raise jsonify(success=False, message='Password does not match!')
+            return jsonify(success=False, message='Password does not match!')
         
+        # Check if email already exists
+        cursor.execute('SELECT * FROM users WHERE email = %s', (email,))
+        if cursor.fetchone():
+            return jsonify(success=False, message='Email already registered!')
+        
+        # Hash the password
+        hashed_password = generate_password_hash(password1, method='pbkdf2:sha256')
+        
+        # Insert new user
+        cursor.execute(
+            'INSERT INTO users (name, email, contact, password, role, status) VALUES (%s, %s, %s, %s, %s, %s)',
+            (fullname, email, contact, hashed_password, 'clerk', 'pending')
+        )
+        conn.commit()
+        cursor.close()
+        conn.close()
 
         return jsonify(success=True, message='Account created successfully!')
 

@@ -12,22 +12,117 @@
       rel="stylesheet"
     />
 
-
     <link
       rel="stylesheet"
       href="{{url_for('static', filename='dist/output.css')}}"
     />
 
-    <link rel="icon" href="{{url_for('static', filename='favico.png')}}">
+    <link rel="icon" href="{{url_for('static', filename='favico.png')}}" />
 
     {% block extra_css %} {% endblock %}
   </head>
   <body>
-    {% if current_page not in ['sign_up', 'login'] %} {% include
-    'components/navbar.html' %} {% endif %} {% block content %} {% endblock %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div id="flash-container" style="position:fixed;top:0;left:0;right:0;z-index:9999;display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:20px;pointer-events:none;">
+        {% for category, message in messages %}
+          {% if category == 'error' %}
+            {% set bg = '#dc2626' %}
+            {% set bar = '#fca5a5' %}
+          {% elif category == 'success' %}
+            {% set bg = '#16a34a' %}
+            {% set bar = '#86efac' %}
+          {% else %}
+            {% set bg = '#2563eb' %}
+            {% set bar = '#93c5fd' %}
+          {% endif %}
+          <div class="flash-message" style="
+            pointer-events:all;
+            background:{{ bg }};
+            color:#fff;
+            border-radius:12px;
+            box-shadow:0 8px 32px rgba(0,0,0,0.22),0 2px 8px rgba(0,0,0,0.12);
+            padding:0;
+            min-width:320px;
+            max-width:480px;
+            overflow:hidden;
+            transform:translateY(-80px);
+            opacity:0;
+            transition:transform 0.4s cubic-bezier(0.34,1.56,0.64,1),opacity 0.3s ease;
+          ">
+            <div style="display:flex;align-items:center;gap:14px;padding:14px 18px;">
+              <!-- icon circle -->
+              <div style="width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.2);flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+                {% if category == 'error' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="#fff" style="width:18px;height:18px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"/>
+                  </svg>
+                {% elif category == 'success' %}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="#fff" style="width:18px;height:18px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                {% else %}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.2" stroke="#fff" style="width:18px;height:18px;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>
+                  </svg>
+                {% endif %}
+              </div>
+              <!-- text -->
+              <div style="flex:1;min-width:0;">
+                <p style="margin:0;font-size:13px;font-weight:700;letter-spacing:0.01em;">
+                  {% if category == 'error' %}Error{% elif category == 'success' %}Success{% else %}Info{% endif %}
+                </p>
+                <p style="margin:3px 0 0;font-size:13px;font-weight:400;opacity:0.92;line-height:1.4;">{{ message }}</p>
+              </div>
+              <!-- close -->
+              <button type="button" onclick="dismissFlash(this.closest('.flash-message'))" style="background:rgba(255,255,255,0.15);border:none;border-radius:8px;cursor:pointer;padding:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.28)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="#fff" style="width:14px;height:14px;">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+              </button>
+            </div>
+            <!-- progress bar -->
+            <div class="flash-progress" style="height:3px;background:{{ bar }};width:100%;transform-origin:left;transition:transform 3s linear;"></div>
+          </div>
+        {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %} {% if current_page not in ['sign_up',
+    'login'] %} {% include 'components/navbar.html' %} {% endif %} {% block
+    content %} {% endblock %}
     <script src="{{url_for('static', filename='javascript/navbar.js')}}"></script>
-    {% block extra_scripts %}
-    
-    {% endblock %}
+    <script>
+      function dismissFlash(el) {
+        el.style.transform = 'translateY(-80px)';
+        el.style.opacity = '0';
+        setTimeout(() => el.remove(), 400);
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const flashMessages = document.querySelectorAll(".flash-message");
+        flashMessages.forEach((msg, index) => {
+          // slide in with stagger
+          setTimeout(() => {
+            msg.style.transform = 'translateY(0)';
+            msg.style.opacity = '1';
+
+            // start progress bar countdown
+            const bar = msg.querySelector('.flash-progress');
+            if (bar) {
+              // small delay so the slide-in finishes first
+              setTimeout(() => {
+                bar.style.transform = 'scaleX(0)';
+              }, 50);
+            }
+          }, index * 120);
+
+          // auto dismiss after 3.5s (slide-in delay + 3s bar)
+          setTimeout(() => {
+            dismissFlash(msg);
+          }, 3500 + index * 120);
+        });
+      });
+    </script>
+    {% block extra_scripts %} {% endblock %}
   </body>
 </html>

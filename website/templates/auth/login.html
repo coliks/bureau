@@ -1,34 +1,73 @@
 {% extends 'base.html' %} {% block extra_css %} {% endblock %} {% block content
 %}
-<div class="bg-[url('/static/images/bfp-bg.jpg')] bg-cover bg-center h-screen grid grid-cols-2">
-    <div class="bg-black/60 p-32 flex flex-col items-start justify-end text-white">
-        <span class="text-sm">Santa Cruz, Fire Station</span>
-        <span class="text-3xl font-bold mb-5">Bureau of Fire Protection</span>
-        <span class="text-sm font-light">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur debitis similique aperiam reprehenderit, corporis illo quaerat, minus explicabo mollitia necessitatibus doloribus perspiciatis quas ullam sunt accusantium a expedita modi porro.</span>
+<div
+  class="bg-[url('/static/images/bfp-bg.jpg')] bg-cover bg-center h-screen grid grid-cols-2"
+>
+  <div
+    class="bg-black/60 p-32 flex flex-col items-start justify-end text-white"
+  >
+    <span class="text-sm">Santa Cruz, Fire Station</span>
+    <span class="text-3xl font-bold mb-5">Bureau of Fire Protection</span>
+    <span class="text-sm font-light"
+      >Lorem ipsum dolor, sit amet consectetur adipisicing elit. Tenetur debitis
+      similique aperiam reprehenderit, corporis illo quaerat, minus explicabo
+      mollitia necessitatibus doloribus perspiciatis quas ullam sunt accusantium
+      a expedita modi porro.</span
+    >
+  </div>
+  <div class="bg-white flex flex-col items-start justify-center p-32">
+    <span class="text-3xl font-bold">Sign In</span>
+    <span class="text-sm font-light"
+      >Enter your credentials to access your account.</span
+    >
+    <form
+      action=""
+      method="POST"
+      class="mt-10 mb-10 w-full flex flex-col gap-5"
+      id="login-form"
+    >
+      <div class="flex flex-col">
+        <label for="" class="text-sm">Email</label>
+        <input
+          type="text"
+          name="email"
+          placeholder="Enter your email"
+          class="text-sm p-4 py-3 rounded-md bg-gray-100"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="" class="text-sm">Password</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="Enter your password"
+          class="text-sm p-4 py-3 rounded-md bg-gray-100"
+        />
+      </div>
+      <div class="flex items-center justify-end">
+        <span
+          class="text-sm hover:cursor-pointer hover:underline hover:text-blue-600"
+          >Forgot password?</span
+        >
+      </div>
+      <button
+        type="submit"
+        class="text-sm flex items-center justify-center bg-sky-600 text-white p-3 rounded-md"
+      >
+        Sign In
+      </button>
+    </form>
+    <div class="border w-full mb-10"></div>
+    <div class="flex items-center justify-center w-full">
+      <p class="text-sm">
+        Don't have an account?
+        <a
+          href="{{url_for('auth.register_account')}}"
+          class="hover:underline hover:text-blue-600 text-blue-600"
+          >Create Account</a
+        >
+      </p>
     </div>
-    <div class="bg-white flex flex-col items-start justify-center p-32">
-        <span class="text-3xl font-bold">Sign In</span>
-        <span class="text-sm font-light">Enter your credentials to access your account.</span>
-        <form action="" class="mt-10 mb-10 w-full flex flex-col gap-5">
-            <div class="flex flex-col">
-                <label for="" class="text-sm">Email</label>
-                <input type="text" placeholder="Enter your email" class="text-sm p-4 py-3 rounded-md bg-gray-100">
-            </div>
-            <div class="flex flex-col">
-                <label for="" class="text-sm">Password</label>
-                <input type="password" placeholder="Enter your password" class="text-sm p-4 py-3 rounded-md bg-gray-100">
-            </div>
-            <div class="flex items-center justify-end">
-                <span class="text-sm hover:cursor-pointer hover:underline hover:text-blue-600">Forgot password?</span>
-            </div>
-            <button class="text-sm flex items-center justify-center bg-sky-600 text-white p-3 rounded-md">
-                Sign In
-            </button>
-        </form>
-        <div class="border w-full mb-10"></div>
-        <div class="flex items-center justify-center w-full">
-            <p class="text-sm">Don't have an account? <a href="{{url_for('auth.register_account')}}" class="hover:underline hover:text-blue-600 text-blue-600">Create Account</a></p>
-        </div>
-    </div>
+  </div>
 </div>
 {% endblock %} {% block extra_scripts %} {% endblock %}
